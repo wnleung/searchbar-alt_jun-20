@@ -1,0 +1,293 @@
+html, body{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+body{
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 16px;
+	color: #4A4A4A;
+
+	-webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6{
+	color: #4A4A4A;
+}
+
+p:last-child{
+	margin-bottom: 0;
+}
+
+.list-reset{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+button{
+	font-size: .75em;
+	background-color: #fff;
+	border-width: 0;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+	border-radius: 4px;
+	padding: .75em;
+	outline: none;
+}
+
+button.close{
+	position: absolute;
+	right: .8em;
+	top: 1.2em;
+	transform: translateY(-50%);
+	height: 30px;
+	width: 30px;
+	background-color: rgba(255,255,255,.8);
+	overflow: hidden;
+	text-indent: -9999px;
+
+	&:focus{
+		outline: none;
+	}
+
+	&:before, &:after{
+		position: absolute;
+		display: block;
+		content: '';
+		width: 60%;
+		height: 1px;
+		background-color: #4A4A4A;
+		top: 50%;
+		left: 50%;
+		transform: translate3d(-50%, -50%, 0) rotate(45deg);
+	}
+
+	&:after{
+		transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+	}
+}
+
+.canvas, .search, .tools, .controls{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.canvas{
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.05);
+	position: absolute;
+
+	&>canvas, &>img{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate3d(-50%, -50%, 0);
+		max-height: 480px;
+	}
+
+	&.canvas-original{
+		z-index: 2;
+		width: 50%;
+		background-color: transparent;
+		overflow: hidden;
+		display: none;
+
+		&>canvas{
+			left: 100%;
+		}
+	}
+}
+
+.controls{
+	position: absolute;
+	top: 100px;
+	bottom: 100px;
+	width: 300px;
+	right: 0;
+	left: auto;
+	background-color: rgba(255,255,255,.8);
+	display: none;
+	padding: 1em;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+
+	.control{
+		display: none;
+
+		.apply-cancel{
+			margin-top: 1em;
+		}
+
+		.tutorial{
+			display: none;
+		}
+	}
+
+	.ui-slider-handle:focus{
+		outline: none !important;
+	}
+
+	h3{
+		font-size: 1.125em;
+		font-weight: 600;
+		margin: 0;
+		margin-right: 80px;
+		margin-bottom: 1em;
+	}
+
+	.control-row + .control-row{
+		margin-top: 1em;
+	}
+}
+
+.tools{
+	left: auto;
+	right: 0;
+	padding: 1em;
+}
+
+.search{
+	padding: 1em;
+
+	.suggestions{
+		// font-size: .75em;
+		// font-weight: 600;
+	}
+
+	.bar{
+		position: relative;
+		input{
+			padding: 1em .8em;
+			width: 500px;
+			outline: none;
+			background-color: rgba(255,255,255,.8);
+			border-width: 0;
+			box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+		}
+
+		button.close{
+			top: 50%;
+			display: none;
+		}
+	}
+
+	ul{
+		background-color: rgba(255,255,255,.8);
+	}
+}
+
+ul.workflow-search-results, ul.feature-search-results{
+	.list-reset;
+	&>li{
+		padding: 1em;
+		position: relative;
+		cursor: pointer;
+		&:hover{
+			background-color: rgba(255,255,255,.8);
+		}
+		h3{
+			font-size: 1.125em;
+			font-weight: 600;
+			margin: 0;
+			margin-right: 80px;
+		}
+		p{
+			font-size: .75em;
+			font-weight: 200;
+			color: #9B9B9B;
+			margin: 0;
+			margin-right: 80px;
+		}
+		.button-area{
+			position: absolute;
+			right: 1em;
+			top: 50%;
+			transform: translate3d(0,-50%, 0);
+		}
+	}
+}
+
+.tools{
+	.tutorial-heading{
+		display: none;
+		position: relative;
+
+		h3{
+			font-size: 1.25em;
+			margin-top: 0;
+		}
+
+		button{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate3d(-50%, -50%, 0);
+			margin-left: 1em;
+		}
+	}
+
+	&.tutorial-mode{
+		background-color: fade(#666, 20%);
+		.tutorial-heading{
+			display: block;
+		}
+	}
+
+	ul{
+		.list-reset;
+		display: flex;
+		&>li{
+			background-color: #fff;
+			box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+			border-radius: 4px;
+			cursor: pointer;
+			padding: 5px 10px;
+			margin: 0 5px;
+			font-size: .75em;
+		}
+	}
+}
+
+.curves-canvas{
+	width: 256px;
+	height: 256px;
+	position: relative;
+
+	canvas{
+		box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+	}
+
+	.control-point{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 11px;
+		height: 11px;
+		background-color: #666;
+		transform: translate3d(-50%, -50%, 0);
+	}
+
+	.control-point-1{
+		top: 255px;
+		left: 0;
+	}
+
+	.control-point-2{
+		top: 155px;
+		left: 100px;
+	}
+
+	.control-point-3{
+		top: 55px;
+		left: 200px;
+	}
+
+	.control-point-4{
+		top: 0px;
+		left: 255px;
+	}
+}
